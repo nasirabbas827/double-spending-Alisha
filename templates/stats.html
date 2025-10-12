@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Statistics Overview</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --color-primary: #6f42c1; /* Purple for Statistics/Analysis */
+            --color-link: #007bff; /* Blue for the link */
+            --color-background: #f4f7f9; /* Off-white background */
+            --color-surface: #ffffff; /* Card Background */
+            --color-code-bg: #e9ecef; /* Light gray for code blocks */
+            --color-text: #343a40; /* Dark Text */
+            --color-border: #ced4da; /* Light border */
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 20px;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--color-surface);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--color-shadow);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-primary);
+            font-weight: 700;
+            border-bottom: 3px solid var(--color-border);
+            padding-bottom: 10px;
+        }
+
+        /* Preformatted Code/JSON Block Styling */
+        pre {
+            background-color: var(--color-code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 600px; 
+            font-size: 0.95em;
+            font-family: Consolas, 'Courier New', monospace;
+            border: 1px solid var(--color-border);
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        /* Back Button */
+        .back-link {
+            text-align: center;
+            margin-top: 40px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--color-link);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Attack Statistics</h1>
+        
+        <h2>Raw Data Output</h2>
+        <pre>{{ data | tojson(indent=2) }}</pre>
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">Back to Home Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

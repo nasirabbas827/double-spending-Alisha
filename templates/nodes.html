@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Nodes Status</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --color-primary: #007bff; /* Blue for links/action */
+            --color-honest: #28a745; /* Green for Honest nodes */
+            --color-malicious: #dc3545; /* Red for Malicious nodes */
+            --color-background: #f4f7f9; /* Off-white background */
+            --color-surface: #ffffff; /* Card Background */
+            --color-text: #343a40; /* Dark Text */
+            --color-border: #ced4da; /* Light border */
+            --color-shadow: rgba(0, 0, 0, 0.1);
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 20px;
+            color: var(--color-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--color-surface);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--color-shadow);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-text);
+            font-weight: 700;
+            border-bottom: 3px solid var(--color-border);
+            padding-bottom: 10px;
+        }
+        
+        /* Node Grid Layout */
+        .node-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        /* Node Card Styling */
+        .node-card { 
+            padding: 15px; 
+            border-radius: 8px; 
+            border: 2px solid; 
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        
+        .node-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .node-card strong {
+            font-weight: 700;
+            color: #555;
+            display: inline-block;
+            min-width: 120px;
+        }
+        
+        /* Honest Node Colors */
+        .node-honest { 
+            background-color: #d4edda; 
+            border-color: var(--color-honest); 
+            color: #155724; 
+        }
+
+        /* Malicious Node Colors */
+        .node-malicious { 
+            background-color: #f8d7da; 
+            border-color: var(--color-malicious);
+            color: #721c24; 
+        }
+
+        /* Footer/Summary */
+        .summary {
+            font-size: 1.2em;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+        }
+
+        /* Back Button */
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--color-primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 1; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Network Nodes Status</h1>
+        
+        <div class="node-grid">
+            {% for node in data.nodes %}
+            <div class="node-card {% if node.is_malicious %}node-malicious{% else %}node-honest{% endif %}">
+                <p>
+                    <strong>Node ID:</strong> {{ node.node_id }}<br>
+                    <strong>Type:</strong> {{ 'Malicious (Attacker)' if node.is_malicious else 'Honest' }}<br>
+                    <strong>Hash Rate:</strong> {{ node.hash_rate }}<br>
+                    <strong>Network Delay:</strong> {{ '%.3f' % node.network_delay }} seconds
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <p class="summary"><strong>Total Nodes:</strong> {{ data.total_nodes }}</p>
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">Back to Home Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

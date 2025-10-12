@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain Status</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --color-primary: #007bff; /* Blue for general info/links */
+            --color-secondary: #343a40; /* Dark text for headings */
+            --color-background: #f4f7f9; /* Off-white background */
+            --color-surface: #ffffff; /* Card Background */
+            --color-code-bg: #e9ecef; /* Light gray for code blocks */
+            --color-border: #ced4da; /* Light border */
+            --color-shadow: rgba(0, 0, 0, 0.08);
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 20px;
+            color: var(--color-secondary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: var(--color-surface);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px var(--color-shadow);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-secondary);
+            font-weight: 700;
+            border-bottom: 3px solid var(--color-border);
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 1.4em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: var(--color-primary);
+            font-weight: 600;
+            border-left: 5px solid var(--color-primary);
+            padding-left: 10px;
+        }
+
+        /* Preformatted Code/JSON Block Styling */
+        pre {
+            background-color: var(--color-code-bg);
+            padding: 20px;
+            border-radius: 8px;
+            overflow: auto;
+            max-height: 700px; /* Increased max height for better chain viewing */
+            font-size: 0.9em;
+            font-family: Consolas, 'Courier New', monospace;
+            border: 1px solid var(--color-border);
+            white-space: pre-wrap; /* Ensure wrapping for long JSON lines */
+            word-wrap: break-word;
+        }
+
+        /* Back Button */
+        .back-link {
+            display: block; /* Make it a block element to center or control width */
+            margin-top: 40px;
+            text-align: center;
+        }
+        
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--color-primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            opacity: 1; /* Reset old opacity style */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Blockchain Status Overview</h1>
+        
+        <h2>Current Blockchain (JSON View)</h2>
+        <pre>{{ data.chain | tojson(indent=2) }}</pre>
+        
+        {% if data.original_transaction %}
+        <h2>Original Transaction Sent to Victim (Before Attack)</h2>
+        <pre>{{ data.original_transaction | tojson(indent=2) }}</pre>
+        {% endif %}
+        
+        <div class="back-link">
+            <a href="{{ url_for('index') }}">Back to Home Dashboard</a>
+        </div>
+    </div>
+</body>
+</html>

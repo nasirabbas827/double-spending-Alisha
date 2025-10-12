@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Error</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --color-primary: #dc3545; /* Red for Error */
+            --color-link: #007bff; /* Blue for the link */
+            --color-background: #f4f7f9; /* Off-white background */
+            --color-surface: #ffffff; /* Card Background */
+            --color-error-bg: #f8d7da; /* Light Red background for output */
+            --color-error-text: #721c24; /* Dark Red text for output */
+            --color-border: #f5c6cb; /* Lighter red border */
+            --color-shadow: rgba(0, 0, 0, 0.1);
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 20px;
+            color: var(--color-error-text);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Center content vertically */
+        }
+
+        .container {
+            max-width: 600px;
+            width: 90%;
+            margin: auto;
+            background-color: var(--color-surface);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px var(--color-shadow);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            color: var(--color-primary);
+            font-weight: 700;
+            border-bottom: 3px solid var(--color-primary);
+            padding-bottom: 10px;
+        }
+
+        /* Error Output Block */
+        .output {
+            background-color: var(--color-error-bg);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: var(--color-error-text);
+            border: 1px solid var(--color-border);
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .output p {
+            margin: 0;
+        }
+
+        /* Back Button */
+        a {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: var(--color-link);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            opacity: 1; /* Reset old opacity style */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Transaction Failed</h1>
+        <div class="output">
+            <p>{{ message }}</p>
+        </div>
+        <a href="{{ url_for('index') }}">Back to Home</a>
+    </div>
+</body>
+</html>

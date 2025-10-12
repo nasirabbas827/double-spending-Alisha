@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attack Result</title>
+    <style>
+        /* Base Styles */
+        :root {
+            --color-primary: #0056b3; /* Dark Blue */
+            --color-danger: #c82333; /* Red for emphasis */
+            --color-background: #f4f7f9; /* Off-white background */
+            --color-surface: #ffffff; /* Card Background */
+            --color-text: #343a40; /* Dark Text */
+            --color-border: #e0e5eb; /* Light Border */
+            --color-shadow: rgba(0, 0, 0, 0.1);
+            --font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--color-background);
+            margin: 0;
+            padding: 20px;
+            color: var(--color-text);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* Center content vertically */
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            margin: auto;
+            background-color: var(--color-surface);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px var(--color-shadow);
+        }
+
+        h1 {
+            font-size: 2.2em;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--color-danger); /* Use danger color for attack result */
+            font-weight: 700;
+            border-bottom: 3px solid var(--color-border);
+            padding-bottom: 10px;
+        }
+
+        .result-details {
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #fafafa;
+        }
+        
+        .result-details p {
+            font-size: 1.05em;
+            margin: 12px 0;
+            padding-left: 10px;
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .result-details p strong {
+            color: var(--color-primary);
+            display: inline-block;
+            min-width: 150px;
+        }
+
+        /* Success Rate Highlight */
+        .result-details p:nth-child(3) { /* Targeting Success Rate */
+            font-weight: bold;
+            color: var(--color-danger);
+            border-left-color: var(--color-danger);
+        }
+
+        /* Navigation Buttons */
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .nav-links a {
+            padding: 12px 25px;
+            background-color: var(--color-primary);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-links a:hover {
+            background-color: #004499; /* Darker primary color on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-links a:first-child {
+            background-color: #6f42c1; /* Purple for Chain link */
+        }
+        
+        .nav-links a:first-child:hover {
+            background-color: #5b369f;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Double-Spending Attack Result</h1>
+        <div class="result-details">
+            <p><strong>Message:</strong> {{ result.message }}</p>
+            <p><strong>Success:</strong> {{ result.success }}</p>
+            <p><strong>Success Rate:</strong> {{ '%.2f' % (result.success_rate * 100) }}%</p>
+            <p><strong>Network Delay:</strong> {{ '%.3f' % result.network_delay }} seconds</p>
+            <p><strong>Private Chain Length:</strong> {{ result.private_chain_length }}</p>
+            <p><strong>Original Tx:</strong> {{ result.original_transaction.sender }} &rarr; {{ result.original_transaction.receiver }} (Amount: {{ result.original_transaction.amount }})</p>
+            <p><strong>Malicious Tx:</strong> {{ result.malicious_transaction.sender }} &rarr; {{ result.malicious_transaction.receiver }} (Amount: {{ result.malicious_transaction.amount }})</p>
+        </div>
+        <div class="nav-links">
+            <a href="{{ url_for('show_chain') }}">View Updated Chain</a>
+            <a href="{{ url_for('index') }}">Back to Home</a>
+        </div>
+    </div>
+</body>
+</html>
